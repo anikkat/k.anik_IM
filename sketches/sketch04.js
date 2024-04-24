@@ -15,6 +15,7 @@ function setup() {
     img.loadPixels();
     img.resize(img.width / 2.5, img.height / 2.5);
     frameRate(480);
+    image(img);
 }
 
 function draw() {
@@ -29,4 +30,6 @@ function draw() {
     let y = height / 2 - img.height / 2 + imgY;
 
     ellipse(x, y, pointillize, pointillize);
+
+
 }
