@@ -2,7 +2,7 @@ let img;
 let smallPoint, largePoint;
 
 function preload() {
-    img = loadImage('../assets/images/proj2b/guy.jpg');
+    img = loadImage('guy.jpg');
 }
 
 function setup() {
