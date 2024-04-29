@@ -6,9 +6,9 @@
 
 html {
     font-family: 'Menlo'; 
-    src: url('../assets/fonts/Menlo-Regular.ttf') format('truetype');
+    src: url('../../fonts/Menlo-Regular.ttf') format('truetype');
     font-family: 'Absans'; 
-    src: url('../assets/fonts/Absans-Regular.otf') format('opentype');
+    src: url('../../fonts/Absans-Regular.otf') format('opentype');
     background-color: #030FD5;
 }
 
