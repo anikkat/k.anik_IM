@@ -12,6 +12,10 @@ html {
     background-color: #030FD5;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 
 #everything {
     display: flex;
