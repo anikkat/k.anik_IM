@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>k.anik — IM.S1</title>   
+</head>
+<body>
+    <div class="centered-titles">
+        <div class="left-column">
+            <p>
+            Name: Katarina Anik Schøller
+            <br>
+            ID: #1307194
+            <br>
+            Institution: University of Melbourne
+            <br>
+            Degree: Bachelor of Design
+            <br>
+            Majors: Graphic Design, Performance Design 
+            <br>
+            Relevant Unit: Interactive Media, S1 2024
+            <br>
+            Focus Fields: Web Design, Creative Coding
+            <br>
+            Completed Projects: 2a, 2b, 2c, Research Journal
+            <br>
+            Upcoming Projects: Personal Project — Collab with Talilah Robbins "LOL"
+            </p>
+        </div>
+        <div class="right-column">
+            <h2 id="proj2a" onmouseover="hoverEffect('proj2a')" onmouseout="normalEffect()">
+                <a href="pages/proj2a/proj2a.html" target="_blank">proj.2a</a>
+            </h2>
+            <h2 id="proj2b" onmouseover="hoverEffect('proj2b')" onmouseout="normalEffect()">
+                <a href="pages/proj2b/proj2b.html" target="_blank">proj.2b</a>
+            </h2>
+            <h2 id="proj2c" onmouseover="hoverEffect('proj2c')" onmouseout="normalEffect()">
+                <a href="pages/proj2c/proj2c.html" target="_blank">proj.2c</a>
+            </h2>
+        </div>
+    </div>
+    <script>
+        function hoverEffect(hoveredId) {
+            const projIds = ['proj2a', 'proj2b', 'proj2c'];
+            const rightColumn = document.querySelector('.right-column');
+            projIds.forEach(id => {
+                document.getElementById(id).style.opacity = (id === hoveredId) ? '1' : '0.5';
+            });
+
+            switch (hoveredId) {
+                case 'proj2a':
+                    rightColumn.style.backgroundColor = "#FF6602";
+                    break;
+                case 'proj2b':
+                    rightColumn.style.backgroundColor = "#030FD5";
+                    break;
+                case 'proj2c':
+                    rightColumn.style.backgroundColor = "#F4F4F4";
+                    break;
+            }
+        }
+
+        function normalEffect() {
+            const projIds = ['proj2a', 'proj2b', 'proj2c'];
+            const rightColumn = document.querySelector('.right-column');
+            projIds.forEach(id => {
+                document.getElementById(id).style.opacity = '1';
+            });
+            rightColumn.style.backgroundColor = "black";
+        }
+    </script>
+</body>
+</html>
