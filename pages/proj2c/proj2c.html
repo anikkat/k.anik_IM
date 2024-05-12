@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>k.anik — Proj.2c</title>
+    <link rel="stylesheet" href="proj2c.css">
+</head>
+<body>
+    <h1>[ proj.2c ]</h1>    
+    <div class="dragqueens" id="queenie">
+        <p>
+        My journey with Arduino, an open-source electronic prototyping platform, was both intriguing and extremely challenging. 
+        <br>
+        The complexity of wiring circuits and coding in a new language presented a steep learning curve. 
+        However, as I delved deeper, I definitely began to appreciate the versatility and potential of Arduino, which enables users to bring creative ideas to life, from simple LED displays to complex robotic systems.
+        Over the past three weeks, each session has incrementally improved my understanding and skills, and if only slightly enhancing my technical abilities, it has significantly deepened my appreciation for electronic prototyping.
+    </div>
+    <div class="dragqueens" id="arduino_01">
+        <img src="images/BlinkTouch_01.gif" alt="Blink! Touch!">
+    </div>
+    <div class="dragqueens" id="arduino_02">
+        <img src="images/FishPlayground_01.gif" alt="Fish Playground">
+    </div>
+    <div class="dragqueens" id="arduino_03">
+        <img src="images/Headspace_01.jpg" alt="Headspace Ultrasonic Buzzer">
+    </div>
+    <div class="dragqueens" id="arduino_04">
+        <img src="images/LEDSmiley_01.jpg" alt="LED Smiley Face">
+    </div>
+    <div class="dragqueens" id="arduino_05">
+        <img src="images/LEDSmiley_03.jpg" alt="LED Smiley Face">
+    </div>
+    <div class="dragqueens" id="arduino_06">
+        <img src="images/FishPlayground_02.png" alt="Fish Playground, Schematic View">
+    </div>
+    <div class="dragqueens" id="arduino_07">
+        <img src="images/Headspace_03.png" alt="Headspace Ultrasonic Buzzer, Circuit View">
+    </div>
+    <div class="dragqueens" id="text_01">
+        <p> <b>Blink! Touch!</b>
+            <br><br>
+            This example demonstrates the simplest interaction with an Arduino to produce a physical output: making the on-board LED blink.            
+            <br><br>
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
+  delay(1000);                      // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
+  delay(1000);                      // wait for a second
+}
+<br><br>
+        </p>
+        <a href="https://docs.arduino.cc/tutorials/uno-rev3/Blink/" target="_blank">Reference: BLINK!</a>
+    </div>
+    <div class="dragqueens" id="text_02">
+    <p><b>Fish Playground</b>
+        <br><br>
+
+In this sketch, the components used included an Arduino, a breadboard, a 10kΩ resistor, a photoresistor, and a positional micro servo, which is notable for its spinning function.
+        <br><br>
+    int photo;
+    Servo s;
+    void setup()
+    {   
+        s.attach(9);
+        Serial.begin(9600);
+    }
+    void loop()
+    {
+        photo = analogRead(A1);
+        Serial.println(photo);
+        if(photo < 700)
+        {
+        s.write(180);
+        }
+        else
+        {
+        s.write(0);
+        }    
+    }
+    </p>
+    </div>
+    <div class="dragqueens" id="text_05">
+        <p> <b>Headspace Ultrasonic Buzzer</b>
+            <br><br>
+            This setup includes an Arduino, a breadboard, an ultrasonic sensor, and a dial. The system is designed so that when an object reaches a certain distance from the sensor, it triggers a sound. The dial adjusts the volume of this sound.
+            <br><br>
+            // C++ code
+//
+const int TRIG_PIN   = 7; // Arduino pin connected to Ultrasonic Sensor's TRIG pin
+const int ECHO_PIN   = 6; // Arduino pin connected to Ultrasonic Sensor's ECHO pin
+const int BUZZER_PIN = 3; // Arduino pin connected to Piezo Buzzer's pin
+const int DISTANCE_THRESHOLD = 50; // centimeters
+// variables will change:
+float duration_us, distance_cm;
+
+void setup(){
+  Serial.begin (9600);         // initialize serial port
+  pinMode(TRIG_PIN, OUTPUT);   // set arduino pin to output mode
+  pinMode(ECHO_PIN, INPUT);    // set arduino pin to input mode
+  pinMode(BUZZER_PIN, OUTPUT); // set arduino pin to output mode
+}
+
+void loop()
+{
+  // generate 10-microsecond pulse to TRIG pin
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+  // measure duration of pulse from ECHO pin
+  duration_us = pulseIn(ECHO_PIN, HIGH);
+  // calculate the distance
+  distance_cm = 0.017 * duration_us;
+  if(distance_cm < DISTANCE_THRESHOLD)
+    digitalWrite(BUZZER_PIN, HIGH); // turn on Piezo Buzzer
+  else
+    digitalWrite(BUZZER_PIN, LOW);  // turn off Piezo Buzzer
+
+  // print the value to Serial Monitor
+  Serial.print("distance: ");
+  Serial.print(distance_cm);
+  Serial.println(" cm");
+
+  delay(500);
+}
+        </p>
+    </div>
+    <div class="dragqueens" id="text_04">
+        <p><b>LED Smiley Face!</b>
+        <br><br>
+        This sketch was notably the most challenging from our workshops, and despite our efforts, it remained unsuccessful. We meticulously organized our setup and maintained a systematic approach, ensuring the breadboard was oriented correctly to avoid mixing up the positive and negative channels. Despite redoing the setup twice, we couldn't establish a functioning connection or get an output from the LED matrix component.
+        <br><br>
+        // 2-dimensional array of row pin numbers:
+const int row[8] = {
+  2, 7, 19, 5, 13, 18, 12, 16
+};
+
+// 2-dimensional array of column pin numbers:
+const int col[8] = {
+  6, 11, 10, 3, 17, 4, 8, 9
+};
+
+// 2-dimensional array of pixels:
+int pixels[8][8];
+
+// cursor position:
+int x = 5;
+int y = 5;
+
+void setup() {
+  // initialize the I/O pins as outputs iterate over the pins:
+  for (int thisPin = 0; thisPin < 8; thisPin++) {
+    // initialize the output pins:
+    pinMode(col[thisPin], OUTPUT);
+    pinMode(row[thisPin], OUTPUT);
+    // take the col pins (i.e. the cathodes) high to ensure that the LEDS are off:
+    digitalWrite(col[thisPin], HIGH);
+  }
+
+  // initialize the pixel matrix:
+  for (int x = 0; x < 8; x++) {
+    for (int y = 0; y < 8; y++) {
+      pixels[x][y] = HIGH;
+    }
+  }
+}
+
+void loop() {
+  // read input:
+  readSensors();
+
+  // draw the screen:
+  refreshScreen();
+}
+
+void readSensors() {
+  // turn off the last position:
+  pixels[x][y] = HIGH;
+  // read the sensors for X and Y values:
+  x = 7 - map(analogRead(A0), 0, 1023, 0, 7);
+  y = map(analogRead(A1), 0, 1023, 0, 7);
+  // set the new pixel position low so that the LED will turn on in the next
+  // screen refresh:
+  pixels[x][y] = LOW;
+}
+
+void refreshScreen() {
+  // iterate over the rows (anodes):
+  for (int thisRow = 0; thisRow < 8; thisRow++) {
+    // take the row pin (anode) high:
+    digitalWrite(row[thisRow], HIGH);
+    // iterate over the cols (cathodes):
+    for (int thisCol = 0; thisCol < 8; thisCol++) {
+      // get the state of the current pixel;
+      int thisPixel = pixels[thisRow][thisCol];
+      // when the row is HIGH and the col is LOW,
+      // the LED where they meet turns on:
+      digitalWrite(col[thisCol], thisPixel);
+      // turn the pixel off:
+      if (thisPixel == LOW) {
+        digitalWrite(col[thisCol], HIGH);
+      }
+    }
+    // take the row pin low to turn off the whole row:
+    digitalWrite(row[thisRow], LOW);
+  }
+}
+<br><br>
+    </p>
+    <a href="https://docs.arduino.cc/built-in-examples/display/RowColumnScanning/" target="_blank">Reference: Row-column scanning to control an 8x8 LED Matrix.</a>
+    </div>
+    <div class="bottombox">
+        <p> Thank you for visiting. </p>
+    </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var draggables = document.querySelectorAll('.dragqueens');
+    var currentZIndex = 1000;
+
+    draggables.forEach(function(draggable) {
+        draggable.addEventListener('mousedown', function(event) {
+            event.preventDefault();
+
+            currentZIndex++;
+            draggable.style.zIndex = currentZIndex;
+
+            var startX = event.clientX;
+            var startY = event.clientY;
+            var rect = draggable.getBoundingClientRect();
+            var offsetX = startX - rect.left;
+            var offsetY = startY - rect.top;
+
+            function moveAt(moveEvent) {
+                if (window.getComputedStyle(draggable).position === 'fixed') {
+                    draggable.style.left = (moveEvent.clientX - offsetX) + 'px';
+                    draggable.style.top = (moveEvent.clientY - offsetY) + 'px';
+                } else {
+                    draggable.style.left = (moveEvent.clientX - offsetX + window.scrollX) + 'px';
+                    draggable.style.top = (moveEvent.clientY - offsetY + window.scrollY) + 'px';
+                }
+            }
+
+            document.addEventListener('mousemove', moveAt);
+
+            draggable.addEventListener('mouseup', function() {
+                document.removeEventListener('mousemove', moveAt);
+            });
+
+            draggable.addEventListener('mouseleave', function() {
+                document.removeEventListener('mousemove', moveAt);
+            });
+        });
+    });
+});
+</script>      
+</body>
+</html>
